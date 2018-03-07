@@ -57,9 +57,7 @@ constexpr double learning_rate = 0.3;
 int main(int argc, char *argv[])
 {
 	Neural_Network *network(new Neural_Network);
-
 	network->init_all_matrix();
-
 
 	load_MNIST_database training_data(
 		"E:/code/THE MNIST DATABASE of handwritten digits/train-labels.idx1-ubyte"
@@ -97,7 +95,7 @@ int main(int argc, char *argv[])
 			++correct_count;
 		}
 	}
-	std::cout << "correct rate is: " << (100.0 * correct_count / test_item_count) << std::endl;
+	std::cout << "accuracy is: " << (100.0 * correct_count / test_item_count) << '%' << std::endl;
 
 	delete val;
 	delete pixels;

@@ -33,9 +33,6 @@
 #include<string>
 #include<ctime>	//use time(nullptr) as random seed;
 
-#include <iostream>
-#include<boost/numeric/ublas/io.hpp>
-
 
 Neural_Network::Neural_Network()
 	: weight_matrix_of_first_layer(16, 28 * 28)
@@ -177,44 +174,6 @@ void Neural_Network::train_neural_network(const unsigned char *image_array, cons
 	bias_2 -= ((learning_rate / data_count) * delta_second);
 	bias_3 -= ((learning_rate / data_count) * delta_final);
 
-
-
-
-
-
-
-
-
-
-
-
-
-	for (size_t i = 0; i < image_matrix.size1(); ++i) { //this is a single column matrix
-		image_matrix(i, 0) = image_array[i] * 1.0 / 255;
-	}
-	axpy_prod(weight_matrix_of_first_layer, image_matrix, first_out_put);
-	first_out_put += bias_1;
-	sigmoid(first_out_put);
-	axpy_prod(weight_matrix_of_second_layer, first_out_put, second_out_put);
-	second_out_put += bias_2;
-	sigmoid(second_out_put);
-	axpy_prod(weight_matrix_of_third_layer, second_out_put, final_out_put);
-	final_out_put += bias_3;
-	sigmoid(final_out_put);
-
-	std::vector<double>vec;
-	for (size_t i = 0; i < final_out_put.size1(); ++i) {
-		vec.push_back(final_out_put(i, 0));
-	}
-	double confidential = -1;
-	int val = -1;
-	for (size_t i = 0; i < vec.size(); ++i) {
-		if (confidential < vec[i]) {
-			confidential = vec[i];
-			val = i;
-		}
-	}
-	std::cout << "picture: " << value[0] << " net: " << val << " confidential: " << confidential << (value[0] == val ? "\tright" : "\twrong") << std::endl;
 }
 
 
